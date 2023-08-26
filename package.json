@@ -1,0 +1,84 @@
+{
+  "name": "jest-coverage-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "NODE_ENV=jest JEST_JUNIT_OUTPUT_FILE=jest-junit.xml jest --collectCoverage --coverageProvider=v8 --coverageDirectory=__coverage__",
+    "testci": "NODE_ENV=jest JEST_JUNIT_OUTPUT_FILE=jest-junit.xml jest --ci --coverage --coverageProvider=v8 --coverageDirectory=__coverage__ --testLocationInResults --json --outputFile=__coverage__/report.json",
+    "build": "esbuild src/app.ts --platform=node --packages=external --bundle --outfile=dist/app.js",
+    "minify": "esbuild src/app.ts --platform=node --packages=external --bundle --outfile=dist/app.js --minify",
+    "watch": "esbuild src/app.ts --platform=node --packages=external --bundle --outfile=dist/app.js --watch",
+    "eslint": "eslint --cache --ignore-path ./.eslintignore --config ./.eslintrc.json --ext .ts --ext .tsx --ext .js ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.4",
+    "@types/request-promise-native": "^1.0.18",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "esbuild": "^0.19.2",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.6.4",
+    "jest-junit": "^16.0.0",
+    "prettier-eslint": "^15.0.1",
+    "typescript": "^5.1.6"
+  },
+  "jest": {
+    "rootDir": "./",
+    "modulePaths": [
+        "<rootDir>"
+    ],
+    "moduleNameMapper": {
+    },
+    "testEnvironment": "node",
+    "verbose": true,
+    "moduleFileExtensions": [
+        "ts",
+        "js",
+        "tsx"
+    ],
+    "transform": {
+        "\\.js$": [
+            "./devprod/tsTransformer.js",
+            {
+                "loader": "js",
+                "target": "node16"
+            }
+        ],
+        "\\.ts$": [
+            "./devprod/tsTransformer.js",
+            {
+                "loader": "ts",
+                "target": "node16"
+            }
+        ],
+        "\\.tsx$": [
+            "./devprod/tsTransformer.js",
+            {
+                "loader": "ts",
+                "target": "node16"
+            }
+        ]
+    },
+    "reporters": [ "default", "jest-junit" ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 50
+      }
+    }
+  },
+  "jest-junit": {
+    "suiteNameTemplate": "{filename}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}",
+    "ancestorSeparator": " > "
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "eslint.nodePath": "./node_modules",
+    "eslint.options": {
+      "overrideConfigFile": "./.eslintrc.json",
+      "ignorePath": "./.eslintignore"
+    },
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+}
