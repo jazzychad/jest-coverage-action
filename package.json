@@ -6,8 +6,8 @@
   "scripts": {
     "test": "NODE_ENV=jest JEST_JUNIT_OUTPUT_FILE=jest-junit.xml jest --collectCoverage --coverageProvider=v8 --coverageDirectory=__coverage__",
     "testci": "NODE_ENV=jest JEST_JUNIT_OUTPUT_FILE=jest-junit.xml jest --ci --coverage --coverageProvider=v8 --coverageDirectory=__coverage__ --testLocationInResults --json --outputFile=__coverage__/report.json",
-    "build": "esbuild src/app.ts --platform=node --bundle --outfile=dist/index.js",
-    "minify": "esbuild src/app.ts --platform=node --bundle --outfile=dist/index.js --minify",
+    "build": "esbuild src/app.ts --platform=node --bundle --minify --outfile=dist/index.js",
+    "maxify": "esbuild src/app.ts --platform=node --bundle --outfile=dist/index.js",
     "watch": "esbuild src/app.ts --platform=node --bundle --outfile=dist/index.js --watch",
     "eslint": "eslint --cache --ignore-path ./.eslintignore --config ./.eslintrc.json --ext .ts --ext .tsx --ext .js ./"
   },
