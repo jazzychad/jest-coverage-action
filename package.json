@@ -6,9 +6,9 @@
   "scripts": {
     "test": "NODE_ENV=jest JEST_JUNIT_OUTPUT_FILE=jest-junit.xml jest --collectCoverage --coverageProvider=v8 --coverageDirectory=__coverage__",
     "testci": "NODE_ENV=jest JEST_JUNIT_OUTPUT_FILE=jest-junit.xml jest --ci --coverage --coverageProvider=v8 --coverageDirectory=__coverage__ --testLocationInResults --json --outputFile=__coverage__/report.json",
-    "build": "esbuild src/app.ts --platform=node --packages=external --bundle --outfile=dist/app.js",
-    "minify": "esbuild src/app.ts --platform=node --packages=external --bundle --outfile=dist/app.js --minify",
-    "watch": "esbuild src/app.ts --platform=node --packages=external --bundle --outfile=dist/app.js --watch",
+    "build": "esbuild src/app.ts --platform=node --bundle --outfile=dist/index.js",
+    "minify": "esbuild src/app.ts --platform=node --bundle --outfile=dist/index.js --minify",
+    "watch": "esbuild src/app.ts --platform=node --bundle --outfile=dist/index.js --watch",
     "eslint": "eslint --cache --ignore-path ./.eslintignore --config ./.eslintrc.json --ext .ts --ext .tsx --ext .js ./"
   },
   "keywords": [],
@@ -34,41 +34,43 @@
   "jest": {
     "rootDir": "./",
     "modulePaths": [
-        "<rootDir>"
+      "<rootDir>"
     ],
-    "moduleNameMapper": {
-    },
+    "moduleNameMapper": {},
     "testEnvironment": "node",
     "verbose": true,
     "moduleFileExtensions": [
-        "ts",
-        "js",
-        "tsx"
+      "ts",
+      "js",
+      "tsx"
     ],
     "transform": {
-        "\\.js$": [
-            "./devprod/tsTransformer.js",
-            {
-                "loader": "js",
-                "target": "node16"
-            }
-        ],
-        "\\.ts$": [
-            "./devprod/tsTransformer.js",
-            {
-                "loader": "ts",
-                "target": "node16"
-            }
-        ],
-        "\\.tsx$": [
-            "./devprod/tsTransformer.js",
-            {
-                "loader": "ts",
-                "target": "node16"
-            }
-        ]
+      "\\.js$": [
+        "./devprod/tsTransformer.js",
+        {
+          "loader": "js",
+          "target": "node16"
+        }
+      ],
+      "\\.ts$": [
+        "./devprod/tsTransformer.js",
+        {
+          "loader": "ts",
+          "target": "node16"
+        }
+      ],
+      "\\.tsx$": [
+        "./devprod/tsTransformer.js",
+        {
+          "loader": "ts",
+          "target": "node16"
+        }
+      ]
     },
-    "reporters": [ "default", "jest-junit" ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
     "coverageThreshold": {
       "global": {
         "lines": 50
@@ -80,5 +82,10 @@
     "classNameTemplate": "{classname}",
     "titleTemplate": "{title}",
     "ancestorSeparator": " > "
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "@octokit/webhooks-types": "^7.2.0"
   }
 }
